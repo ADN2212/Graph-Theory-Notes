@@ -33,11 +33,26 @@ const notUG = [
 	[0, 1, 2, 3, 4],
 ]
 
+//This breaks the algorithm.
+const icosahedron = [
+	[1,2,3,8,11],//0
+	[0,2,5,10,11],//1
+	[0,1,3,5],//2
+	[0,2,4,6,8],//3
+	[3,6,7,5],//4
+	[2,4,7,10,1],//5
+	[3,4,7,9,8],//6
+	[4,5,6,9,10],//7
+	[0,3,6,9,11],//8
+	[8,6,7,10,11],//9
+	[9,7,5,1,11],//10
+	[0,8,9,10,1]//11
+]
 
 //Ver El Teorema de los 5 colores:
 var posibleColors = ["red", "blue", "green", "yellow", "brown"];
 
-function getChromaticColor(graph) {
+function getChromaticNumber(graph) {
 	//Primero asumimos que el grafo viene "pintado" de un clor:
 	let nodeColors = Array(graph.length).fill("white");
 	//En este array guardamos los colores que han sido usados:
@@ -55,7 +70,7 @@ function getChromaticColor(graph) {
 	}
 
 	return {
-		chromaticColor: usedColors.length,
+		chromaticNumber: usedColors.length,
 		coloredNodes: nodeColors.map((color, index) => [index, color]),
 	};
 }
@@ -102,7 +117,32 @@ function getDiferentColor(
 	return nodeColor;
 }
 
-console.log(getChromaticColor(g1));
-console.log(getChromaticColor(g2));
-console.log(getChromaticColor(cube));
-console.log(getChromaticColor(notUG))
+//kconsole.log(getChromaticNumber(g1));
+//console.log(getChromaticNumber(g2));
+//console.log(getChromaticNumber(cube));
+//console.log(getChromaticNumber(notUG))
+console.log(getChromaticNumber(icosahedron))
+
+
+
+
+
+// const icosahedral = [
+// 	[1, 2, 9, 10, 11],//0
+// 	[0, 9, 4, 3, 2],//1
+// 	[0, 11, 6, 3, 1],//2
+// 	[1, 4, 5, 6, 2],//3
+// 	[1, 9, 7, 3, 5],//4
+// 	[3, 4, 7, 8, 6],//5
+// 	[3, 5, 8, 11, 2],//6
+// 	[4, 9, 10, 8, 5],//7
+// 	[7, 10, 11, 6, 5],//8
+// 	[1, 0, 10, 7, 4],//9
+// 	[9, 0, 11, 8, 7],//10
+// 	[0, 2, 6, 8, 10]//11
+// ]
+
+
+
+
+
