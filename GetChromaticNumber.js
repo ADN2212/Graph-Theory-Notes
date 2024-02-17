@@ -31,7 +31,76 @@ const notUG = [
 	[0, 1, 2, 3, 4],
 	[0, 1, 2, 3, 4],
 	[0, 1, 2, 3, 4],
-]
+];
+
+//Un grafo vacio tendra X = 1 sin importar la cantidad de nodos.
+const emptyGrap = [[], [], []];
+
+const g3 = [
+	[1, 2, 5],
+	[0, 6, 7],
+	[0, 3, 8],
+	[2, 4, 7],
+	[3, 5, 6],
+	[0, 4, 9],
+	[1, 4, 8],
+	[1, 3, 9],
+	[2, 6, 9],
+	[5, 7, 8],
+];
+
+const dodecahedron = [
+	[1, 2, 5],
+	[0, 4, 13],
+	[0, 3, 7],
+	[2, 4, 9],
+	[3, 1, 11],
+	[0, 6, 18],
+	[7, 5, 14],
+	[2, 6, 8],
+	[9, 7, 15],
+	[3, 8, 10],
+	[9, 11, 16],
+	[4, 10, 12],
+	[11, 13, 17],
+	[1, 12, 18],
+	[6, 15, 18],
+	[8, 14, 16],
+	[10, 15, 17],
+	[12, 16, 18],
+	[5, 14, 17, 13],
+];
+
+//Ver ejercicio 4 del cap Graph Coloring
+const notSuperGraphOfk3 = [
+	[1, 4], //0
+	[0, 2], //1
+	[1, 3], //2
+	[2, 4], //3
+	[0, 3, 5, 7, 10], //4
+	[4, 6], //5
+	[5, 7], //6
+	[6, 10, 8], //7
+	[7, 9], //8
+	[4, 8], //9
+	[4, 7], //10
+	[8, 9, 10], //11
+];
+
+//Ver figura 126:
+const notSuperGraphOfk3_2 = [
+	[1, 2, 3],//0
+	[0, 4, 8],//1
+	[0, 6, 7],//2
+	[0, 5, 9],//3
+	[1, 5, 7],//4
+	[4, 6, 3],//5
+	[2, 5, 8],//6
+	[2, 4, 9],//7
+	[1, 6, 9],//8
+	[3, 7, 8],//9
+	[3],//10
+];
 
 //This breaks the algorithm.
 const icosahedron = [
@@ -52,7 +121,11 @@ const icosahedron = [
 //Ver El Teorema de los 5 colores:
 var posibleColors = ["red", "blue", "green", "yellow", "brown"];
 
-function getChromaticNumber(graph) {
+//Esta funcion toma como argumento un grafo representado por una lista de abjacencia,
+//Retorna un JSON con dos keys, el chromatic number del grafo y un array de nodos coloreados.
+//Este algoritmo cae dentro de la categoria de gready algorithms porque va tomado la desiciones localmente
+//con la esperanza de que al final se genere la solucion optima, cosa que en algunos casos no pasa, ver el icosahedron.
+function greadyGetChromaticNumber(graph) {
 	//Primero asumimos que el grafo viene "pintado" de un clor:
 	let nodeColors = Array(graph.length).fill("white");
 	//En este array guardamos los colores que han sido usados:
@@ -75,6 +148,7 @@ function getChromaticNumber(graph) {
 	};
 }
 
+//Se encarga de conseguir un color distinto al de los nodos vecinos:
 function getDiferentColor(
 	currentNodeColor,
 	currentNodeNeighbors,
@@ -117,32 +191,12 @@ function getDiferentColor(
 	return nodeColor;
 }
 
-//kconsole.log(getChromaticNumber(g1));
-//console.log(getChromaticNumber(g2));
-//console.log(getChromaticNumber(cube));
-//console.log(getChromaticNumber(notUG))
-console.log(getChromaticNumber(icosahedron))
-
-
-
-
-
-// const icosahedral = [
-// 	[1, 2, 9, 10, 11],//0
-// 	[0, 9, 4, 3, 2],//1
-// 	[0, 11, 6, 3, 1],//2
-// 	[1, 4, 5, 6, 2],//3
-// 	[1, 9, 7, 3, 5],//4
-// 	[3, 4, 7, 8, 6],//5
-// 	[3, 5, 8, 11, 2],//6
-// 	[4, 9, 10, 8, 5],//7
-// 	[7, 10, 11, 6, 5],//8
-// 	[1, 0, 10, 7, 4],//9
-// 	[9, 0, 11, 8, 7],//10
-// 	[0, 2, 6, 8, 10]//11
-// ]
-
-
-
-
-
+//console.log(greadyGetChromaticNumber(emptyGrap))
+//console.log(greadyGetChromaticNumber(g1));
+//console.log(greadyGetChromaticNumber(g2));
+//console.log(greadyGetChromaticNumber(cube));
+//console.log(greadyGetChromaticNumber(notUG))
+//console.log(greadyGetChromaticNumber(g3))
+//console.log(greadyGetChromaticNumber(dodecahedron))
+//console.log(greadyGetChromaticNumber(notSuperGraphOfk3));
+console.log(greadyGetChromaticNumber(notSuperGraphOfk3_2))
